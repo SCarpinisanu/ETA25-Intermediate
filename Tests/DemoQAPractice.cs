@@ -50,7 +50,7 @@ namespace Automation
 
             commonPage.GoToDesiredMenuItem("Practice Form");
 
-            commonPage.SelectDateOfBirth();
+            commonPage.SelectDOB("November", "2009", "13");
 
         }
 

@@ -29,32 +29,23 @@ namespace Automation.Pages
             Console.WriteLine(menuName);
         }
 
-        public void SelectDateOfBirth()
+        public void SelectDOB(string monthPick, string yearPick, string dayPick)
         {
-            var dateInput = webDriver.FindElement(By.Id("dateOfBirthInput"));
+            var dateSelected = webDriver.FindElement(By.Id("dateOfBirthInput"));
 
-            // 1. Click pe input ca să deschizi calendarul
-            dateInput.Click();
+            dateSelected.Click();
 
-            // 2. Selectează luna "February" (value="1")
-            var monthDropdown = webDriver.FindElement(By.ClassName("react-datepicker__month-select"));
-            var selectMonth = new SelectElement(monthDropdown);
-            selectMonth.SelectByText("February");
+            var selectMonthList = webDriver.FindElement(By.ClassName("react-datepicker__month-select"));
+            var selectMonth = new SelectElement(selectMonthList);
+            selectMonth.SelectByText(monthPick);
 
-            // 3. Selectează anul "1967"
-            var yearDropdown = webDriver.FindElement(By.ClassName("react-datepicker__year-select"));
-            var selectYear = new SelectElement(yearDropdown);
-            selectYear.SelectByText("1967");
+            var selectYearList = webDriver.FindElement(By.ClassName("react-datepicker__year-select"));
+            var selectYear = new SelectElement(selectYearList);
+            selectMonth.SelectByText(monthPick);
 
-            // 4. Click pe ziua 6 februarie (verificăm că are aria-label potrivit)
-            var day6 = webDriver.FindElement(By.CssSelector("div.react-datepicker__day--006:not(.react-datepicker__day--outside-month)"));
-            day6.Click();
-
-            // 5. Verificare: inputul ar trebui să aibă acum valoarea "06 Feb 1967"
-            string selectedDate = dateInput.GetAttribute("value");
-            Console.WriteLine($"Data selectată: {selectedDate}");
+            var dayOfBirthSelect = webDriver.FindElement(By.CssSelector($"div.react-datepicker__day--0{dayPick}:not(.react-datepicker__day--oyside-month)"));
+            dayOfBirthSelect.Click();
         }
-
 
     }
 }
